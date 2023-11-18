@@ -1,0 +1,49 @@
+{% extends "main/header.html" %}
+{% load custom_tags %}
+
+{% block content %}
+<div class="container" style="width:70%">
+    <br>
+    {% if user.groups.all %}
+        <h1 class="story-title" style="display: inline-block;">{{ user.first_name }} {{ user.last_name }}</h1>
+    {% else %}
+        <h1 class="story-title" style="display: inline-block;">{{ user }}</h1>
+    {% endif %}
+    <span style="width: 60%; display: inline-block;">
+    {% for group in user.groups.all %}
+        <div class="user-tag">
+        {{ group.name }}
+        </div>
+    {% endfor %}
+    </span>
+    <h6 class="story-date">Joined • {{ user.date_joined }}</h2>
+    <hr>
+    <br>
+    {% if writing_list %}
+        <h3 class="story-title">By {{ user.first_name }} {{ user.last_name }}</h3>
+        <hr>
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+            {% for story in writing_list %}
+                <div class="col-5 list-block">
+                    <a href="/story/{{ story.story_id }}"><h4 class="story-title">{% blurb_text story.title 35 %}</h4></a>
+                    <h6 class="story-date">{{ story.date }} • {{ story.category }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endif %}
+    {% if reading_list %}
+        <h3 class="story-title">Reading List</h3>
+        <hr>
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+            {% for story in reading_list %}
+                <div class="col-5 list-block">
+                    <a href="/story/{{ story.story_id }}"><h4 class="story-title">{% blurb_text story.title 35 %}</h4></a>
+                    <h6 class="story-date">{{ story.date }} • {{ story.category }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endif %}
+</div>
+{% endblock %}

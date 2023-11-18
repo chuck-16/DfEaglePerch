@@ -1,0 +1,44 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+<form method="POST">
+  {% csrf_token %}
+  <hr>
+  <div class="form-group">
+    <label for="exampleInputUsername1">Username<font color="red">*</font></label>
+    <input name="username" type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputUsername1">First Name<font color="red">*</font></label>
+    <input name="first_name" type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputUsername1">Last Name<font color="red">*</font></label>
+    <input name="last_name" type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Last Name" required>
+    <small>Your name will only be shown if you publish an article</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email<font color="red">*</font></label>
+    <input name="email" type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password<font color="red">*</font></label>
+    <input name="password1" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+  </div>
+  <ul>
+    <li>Your password can’t be too similar to your other personal information.</li>
+    <li>Your password must contain at least 8 characters.</li>
+    <li>Your password can’t be a commonly used password.</li>
+    <li>Your password can’t be entirely numeric.</li>
+  </ul>
+  <div class="form-group">
+    <label for="exampleInputPassword2"></label>
+    <input name="password2" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password (Again)" required>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Register</button>
+  <small id="emailHelp" class="form-text text-muted"><font color="red">*</font> Required</small>
+</form>
+
+{% endblock %}

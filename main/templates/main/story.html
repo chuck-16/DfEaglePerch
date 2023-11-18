@@ -1,0 +1,74 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+<div class="container" style="width:60%">
+    <br>
+    <h1 class="story-title">{{ story.title }}</h1>
+    <h6 class="story-date">{{ story.date }} • {{ story.category }}</h2>
+        {% if not story.state == "Published" %}
+            <h6><i><font color="red">{{ story.state }}</font></i></h6>
+        {% endif %}
+    <button title="Copy Link" class="share-button btn" onclick="copyText()"><i class="fa-solid fa-link"></i></button>
+    
+    {% if user.is_authenticated %}
+        <form style="display:inline-block; width: 40px;" method="post">
+            {% csrf_token %}
+            {% if in_reading_list %}
+                <button type="submit" title="Add to Reading List" class="share-button btn"><i class="fa-solid fa-bookmark"></i></button>
+            {% else %}
+                <button type="submit" title="Add to Reading List" class="share-button btn"><i class="fa-regular fa-bookmark"></i></button>
+            {% endif %}  
+        </form>
+    {% endif %}
+
+    <button title="Print" class="share-button btn" onclick="window.print()"><i class="fa-solid fa-print"></i></button>
+
+    <hr class="story-hr">
+    {% if story.story_image %}
+        <img class="headline-img" src="{{ story.story_image.url }}">
+    {% endif %}
+    <br>
+    <br>
+    <h6 class="story-title">By <a href="/profile/{{ story.author }}" style="text-decoration: underline !important;">{{ story.author.first_name }} {{ story.author.last_name }}</a></h6>
+    <br>
+    
+    {{ story.content|safe }}
+</div>
+<br>
+<h2 class="story-title">More from {{ story.author.first_name }} {{ story.author.last_name}}</h2>
+<hr>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+{% for story in more_from_author %}
+    <div class="col-4 story-block">
+        <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ story.title }}</h4></a>
+        <h6 class="story-date">{{ story.date }} - {{story.category}}</h6>
+    </div>
+{% endfor %}
+</div>
+
+<br>
+<br>
+<h2 class="story-title">More from {{ story.category }}</h2>
+<hr>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+{% for story in more_from_category %}
+    <div class="col-4 story-block">
+        <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ story.title }}</h4></a>
+        <h6 class="story-date">{{ story.date }} - {{story.category}}</h6>
+    </div>
+{% endfor %}
+</div>
+
+<script>
+    function copyText() {
+        navigator.clipboard.writeText("127.0.0.1:8000/story/{{ story.story_id }}")
+        .then(() => {
+        console.log(`Copied text to clipboard: 127.0.0.1:8000/story/{{ story.story_id }}`);
+        })
+        .catch((error) => {
+            console.error(`Could not copy text: 127.0.0.1:8000/story/{{ story.story_id }}`);
+        });
+    }
+</script>
+{% endblock %}

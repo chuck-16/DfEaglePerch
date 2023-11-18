@@ -1,0 +1,66 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <title>DF Students</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script src="https://kit.fontawesome.com/39aab2e1e9.js" crossorigin="anonymous"></script>
+</head>
+
+<div id="logo-section" class="bg-light">
+    <nav class="pb-0 navbar navbar-light justify-content-center bottom-nav">
+    <a class="navbar-brand">
+        <h1 class="logo text-center"><font color="#0066CC">DF</font> Students</h1>
+        <h5 class="logo text-center"><i>From The Students For The Students</i></h5>
+    </a>
+</nav>
+</div>
+<div id="navbar-long" class="navbar navbar-dark bg-dark small-navbar" style="padding: 0%; width: 100%; margin-top: 0px; background-color: darkred !important; position: relative; z-index: 10;">
+
+    <div style="margin: 0%; font-size: larger; margin-left: auto; margin-right: auto; padding: 0%; color:red;">
+        <a class="nav-item">*You are viewing this story from your phone. See more stories at <strong>dfnewspaper.com</strong> on PC.*</a>
+    </div>
+</div>
+
+<div class="container" style="width:100%;">
+  
+    <div class="container" style="width:100%">
+        <br>
+        <h1 class="story-title">{{ story.title }}</h1>
+        <h5 class="story-date">{{ story.date }} • {{ story.category }}</h2>    
+
+        <button title="Copy Link" class="share-button btn" onclick="copyText()"><i class="fa-solid fa-link"></i></button>   
+
+        <hr class="story-hr">
+        {% if story.story_image %}
+            <img class="headline-img" src="{{ story.story_image.url }}">
+        {% endif %}
+
+        <br>
+        <br>
+        <h4 class="story-title">By <a href="/profile/{{ story.author }}">{{ story.author.first_name }} {{ story.author.last_name }}</a></h6>
+        <br>
+    
+        <div style="font-size: x-large;">
+            {{ story.content|safe }}
+        </div>
+    
+    
+</div>
+
+</div>
+<script>
+    function copyText() {
+        navigator.clipboard.writeText("127.0.0.1:8000/story/{{ story.story_id }}")
+        .then(() => {
+        console.log(`Copied text to clipboard: 127.0.0.1:8000/story/{{ story.story_id }}`);
+        })
+        .catch((error) => {
+            console.error(`Could not copy text: 127.0.0.1:8000/story/{{ story.story_id }}`);
+        });
+    }
+</script>

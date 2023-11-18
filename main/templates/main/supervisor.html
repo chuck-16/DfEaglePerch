@@ -1,0 +1,91 @@
+{% extends "main/header.html" %}
+{% load custom_tags %}
+
+{% block content %}
+<div class="container" style="width:70%">
+    <br>
+    <h1 class="story-title">Editor In Chief Portal</h1>
+    <hr>
+    <br>
+    <h2 class="story-title">Awaiting Approval</h2>
+    <hr>
+    {% if awaiting_approval %}
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+            {% for story in awaiting_approval %}
+                <div class="col-6 list-block">
+                    <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{% blurb_text story.title 12 %}</h4></a>
+                    <span style="width:50%; display: inline-block;">
+                        <a href="/edit_story/{{ story.story_id }}" class="user-tag">Edit</a>
+                        <a href="/change_state/{{ story.story_id }}/Awaiting Editor Approval/supervisor_view" class="user-tag">Revoke</a>
+                        <a href="/change_state/{{ story.story_id }}/Published/supervisor_view" class="user-tag">Approve</a>
+                    </span>
+                    <h6 class="story-date">{{ story.date }} • {{ story.author.first_name }} {{ story.author.last_name }}</h6>
+                    <h6><i><font color="red">Awaiting Your Approval</font></i></h6>
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endif %}
+    <h2 class="story-title">Published</h2>
+    <hr>
+    {% if published %}
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+            {% for story in published %}
+                <div class="col-6 list-block">
+                    <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{% blurb_text story.title 18 %}</h4></a>
+                    <span style="display: inline-block;"></span>
+                        <a href="/edit_story/{{ story.story_id }}" class="user-tag">Edit</a>
+                        <a href="/change_state/{{ story.story_id }}/Awaiting Editor In Chief Approval/supervisor_view" class="user-tag">Revoke</a>
+                    </span>
+                    <h6 class="story-date">{{ story.date }} • {{ story.author.first_name }} {{ story.author.last_name }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endif %}
+    <h2 class="story-title">Users</h2>
+    <hr>
+    {% if writers or editors or supervisors or users %}
+    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+        {% for normal_user in users %}
+            <div class="col-6 list-block">
+                <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ normal_user }}</h4></a>
+                <span style="display: inline-block;"></span>
+                    <a href="/change_group/{{ normal_user.id }}/Writer/supervisor_view" class="user-tag">Promote</a>
+                </span>
+                <h6 class="story-date"><a href="/profile/{{ normal_user }}">{{ normal_user.first_name }} {{ normal_user.last_name }}</a></h2>
+                <h6><i><font color="black">Non-Staff User</font></i></h6>
+            </div>
+        {% endfor %}
+        {% for writer in writers %}
+            <div class="col-6 list-block">
+                <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ writer }}</h4></a>
+                <span style="display: inline-block;"></span>
+                    <a href="/change_group/{{ writer.id }}/Editor/supervisor_view" class="user-tag">Promote</a>
+                    <a href="/remove_group/{{ writer.id }}/supervisor_view" class="user-tag">Demote</a>
+                </span>
+                <h6 class="story-date"><a href="/profile/{{ writer }}">{{ writer.first_name }} {{ writer.last_name }}</a></h2>
+                <h6><i><font color="blue">Writer</font></i></h6>
+            </div>
+        {% endfor %}
+        {% for editor in editors %}
+            <div class="col-6 list-block">
+                <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ editor }}</h4></a>
+                <span style="display: inline-block;"></span>
+                    <a href="/change_group/{{ editor.id }}/Writer/supervisor_view" class="user-tag">Demote</a>
+                </span>
+                <h6 class="story-date"><a href="/profile/{{ editor }}">{{ editor.first_name }} {{ editor.last_name }}</a></h2>
+                <h6><i><font color="red">Editor</font></i></h6>
+            </div>
+        {% endfor %}
+        {% for supervisor in supervisors %}
+            <div class="col-6 list-block">
+                <a style="display: inline-block;" href="/story/{{ story.story_id }}"><h4 class="story-title">{{ supervisor }}</h4></a>
+                <h6 class="story-date"><a href="/profile/{{ editor }}">{{ supervisor.first_name }} {{ supervisor.last_name }}</a></h2>
+                <h6><i><font color="green">Editor In Chief</font></i></h6>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<div class="container" style="width: 80%;">
+    <br>
+    <h1 class="story-title">You Searched For "{{ query }}"</h1>
+    <hr> 
+    {% for story in stories %}
+        <a href="/story/{{ story.story_id }}"><h3 class="story-title">{{story.title }}</h3></a>
+        <h6 class="story-date">{{ story.date }} • {{ story.category }}</h2> 
+        <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}

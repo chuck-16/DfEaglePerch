@@ -1,0 +1,28 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<div class="container" style="width:75%">
+    <br>
+    <h1 class="story-title">{{ story.title }}</h1>
+    <h6 class="story-date">{{ story.date }} • {{ story.category }}</h2>
+    <h6><i><font color="red">{{ story.state }} - <a href="/story/{{ story.story_id }}"><strong>View Full Preview</strong><i style="font-size: small;"> (please save changes before preview)</i></a></font></i></h6>
+
+    <button title="Copy Link" class="share-button btn" onclick="copyText()"><i class="fa-solid fa-link"></i></button>
+    
+    <form style="display:inline-block; width: 40px;" method="post">
+        <button type="submit" title="Add to Reading List" class="share-button btn"><i class="fa-solid fa-bookmark"></i></button>
+    </form>
+
+    <button title="Print" class="share-button btn" onclick="window.print()"><i class="fa-solid fa-print"></i></button>
+
+    <hr class="story-hr">
+    <h6 class="story-title">By <a href="/profile/{{ story.author }}">{{ story.author.first_name }} {{ story.author.last_name }}</a></h6>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button style="margin-bottom: 10px;" class="btn btn-primary" type="submit">Save</button>
+        {{ form.media }}
+        {{ form.as_p }}
+    </form>
+</div>
+{% endblock %}

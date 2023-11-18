@@ -1,0 +1,148 @@
+.headline-img {
+    width: 80%;
+}
+.story-category {
+    color: #0066CC;
+    width: fit-content;
+    padding: 2px;
+}
+.blurb-img {
+    max-height: 100px;
+    max-width: 125px;
+    display: inline-block;
+}
+.short-img {
+    max-height: 150px;
+    max-width: 200px;
+}
+.featured-img {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.story-blurb-container {
+    padding: 5px;
+    border-bottom: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    margin: 5px;
+}
+.logo {
+    font-family: Georgia, serif;
+}
+.list-block{
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: black;
+    width: 350px;
+    height: 120px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.story-block{
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: black;
+    min-height: 260px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.vl {
+    border-left: 1px solid rgba(0,0,0,.1);
+    height:900px;
+    margin-right: 1%;
+    margin-right: 1%;
+    overflow-y: auto;
+}
+.side-container {
+    width: 20%;
+}
+.story-title {
+    font-family: "PT Serif", serif;
+}
+.story-date {
+    font-family: "PT Serif", serif;
+    font-style: italic;
+    color:#909090;
+    width: fit-content;
+}
+.story-blurb {
+    font-family: "PT Serif", serif;
+}
+.story-divider {
+    margin-left: 25%;
+}
+.story-content {
+    font-family: "PT Serif", serif;
+    font-size: 20px;
+}
+
+.nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+    color:white !important; 
+}
+.nav-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+    color:white !important;
+}
+.share-button {
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+}
+.share-button:hover {
+    background-color: whitesmoke;
+}
+.story-hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.scrolling-wrapper{
+	overflow-x: auto;
+}
+.user-tag {
+    font-size: small;
+    padding: 0% 1% 0% 1%;
+    border-radius:32.5px;
+    background-color:gainsboro;
+    display: inline-block;
+}
+
+[title] {
+    position: relative;
+  }
+
+  [title]:after {
+    font-family: "PT Serif", serif;
+    content: attr(title);
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 90%; 
+    color: white;
+    background-color: #353535;
+    width: max-content;
+    border: solid;
+    opacity: 0;
+    transition: opacity 0.75s ease-in-out;
+    -webkit-transition: opacity 0.75s ease-in-out; /* 👈 Change the time to meet your requirements. */
+  }
+
+[title]:hover:after {
+    opacity: 1;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important; 
+}

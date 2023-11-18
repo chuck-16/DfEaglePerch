@@ -1,0 +1,62 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<br>
+<div class="vl" style="display: inline-block; width:1%; margin-right:0%; float: left;"></div>
+<div class="container" style="width: 35%; display: inline-block; float:left;">
+    {% if featured_story.story_image %}
+        <a href="/story/{{ featured_story.story_id }}">
+            <div class="container">
+                <img class="headline-img" src="{{ featured_story.story_image.url }}">
+                <h5 class="story-category">{{ featured_story.category }}</h5>
+                <h3 class="story-title">{{ featured_story.title }}</h3>
+                <h6 class="story-date">{{ featured_story.date }} • {{ featured_story.author.first_name }} {{ featured_story.author.last_name }}</h6>
+            </div>
+        </a>
+    {% endif %}
+    <hr>
+        <div class="text-center">
+            <h3>Sponsored By</h3>
+            <a href="/pass_on/Piccola" target="blank">
+                <img style="width: 250px; height: auto; margin-top: 15px;" src="/images/piccola.png">
+            </a>
+            <a href="/pass_on/Cocoa Tree" target="blank">
+                <img style="width: 250px; height: auto; margin-top: 30px;" src="/images/CocoaTree.webp">
+            </a>
+        </div>
+    </a>
+</div>
+<div class="vl" style="display: inline-block; width:2%; margin-right:0%; float: left;"></div>
+<div class="container" style="width: 30%; display: inline-block; float:left;">
+{% for story in feature_stories %}
+    <a href="/story/{{ story.story_id }}">
+    <div class="container story-blurb-container">
+            <div class="container">
+                <h5 class="story-category">{{ story.category }}</h5>
+                <h4 class="story-title">{{ story.title }}</h3>
+                <h7 class="story-date">{{ story.date }} • {{ story.author.first_name }} {{ story.author.last_name }}</h7>
+            </div>     
+    </div>
+    </a>
+    {% endfor %}
+</div>
+<div class="vl" style="display: inline-block; width:2%; margin-right:0%; float: left;"></div>
+<div class="container" style="width: 29%; display: inline-block; float:left;">
+{% for story in image_feature_stories %}
+    <a href="/story/{{ story.story_id }}">
+    <div class="container story-blurb-container">
+            <div style="display: inline-block; width:100%;" class="container">
+                <img class="short-img" src="{{ story.story_image.url }}">
+                <h5 class="story-category">{{ story.category }}</h5>
+                <h4 class="story-title">{{ story.title }}</h4> 
+            </div>   
+    </div>
+    </a>
+    {% endfor %}
+
+</div>
+<div class="vl" style="display: inline-block; width:1%; margin-right:0%; float: right;
+"></div>
+<hr style="margin-top: 1000px;">
+
+{% endblock %}
